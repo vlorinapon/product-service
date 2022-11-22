@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  product-api-nest:
+    depends_on:
+      - product-db-nest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: product-api-nest
+    container_name: product-api-nest
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - .:/home/node/app
+    networks:
+      - app-network
+    command: npm run watch
+  product-db-nest:
+    image: 'postgres:15'
+    restart: unless-stopped
+    container_name: product-db-nest
+    ports:
+      - "${EXT_POSTGRES_PORT}:${POSTGRES_PORT}"
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - db_volume:/var/lib/postgresql/data/
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_volume:
