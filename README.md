@@ -41,14 +41,15 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Creating a CRUD Module
 
-- $nest generate resource product
+```- $nest generate resource product
 - What transport layer do you use? REST API
 - Would you like to generate CRUD entry points? Yes
+
 
 After that completes, we need to install an additional NestJS package to support some of the created resources:
 
 $ npm i --save @nestjs/mapped-types
-
+```
 
 ## Install NestJs Typeorm 
 $npm install --save @nestjs/typeorm
