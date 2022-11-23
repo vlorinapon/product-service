@@ -39,10 +39,11 @@ $ npm run test:cov
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 
-## Creating a CRUD Module 
-$nest generate resource product
-? What transport layer do you use? REST API
-? Would you like to generate CRUD entry points? Yes
+## Creating a CRUD Module
+
+- $nest generate resource product
+- What transport layer do you use? REST API
+- Would you like to generate CRUD entry points? Yes
 
 After that completes, we need to install an additional NestJS package to support some of the created resources:
 
