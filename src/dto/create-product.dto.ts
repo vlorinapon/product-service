@@ -1,5 +1,5 @@
 export class CreateProductDto {
-  name: string;
-  sku: string;
+  inriverName: string;
+  inriverSku: string;
 }
 export default CreateProductDto;

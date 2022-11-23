@@ -1,12 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import CreateProductDto from './dto/create-product.dto';
-import ProductEntity from './entities/product.entity';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { CreateProductDto } from '../dto/create-product.dto';
+import { UpdateProductDto } from '../dto/update-product.dto';
+import ProductEntity from '../entities/product.entity';
+import { IProductService } from './product.interface';
 
 @Injectable()
-export class ProductService {
+export class ProductService implements IProductService {
   constructor(
     @InjectRepository(ProductEntity)
     private ProductRepository: Repository<ProductEntity>,
@@ -33,18 +34,23 @@ export class ProductService {
 
   // create
   async createProduct(product: CreateProductDto) {
-    const newProduct = this.ProductRepository.create(product);
+    const prodEntity: ProductEntity = {
+      id: Date.now(),
+      name: product.inriverName,
+      sku: product.inriverSku,
+    };
+    const newProduct = this.ProductRepository.create(prodEntity);
     await this.ProductRepository.save(newProduct);
 
     return newProduct;
   }
 
   // update
-  async updateProduct(id: number, post: UpdateProductDto) {
-    await this.ProductRepository.update(id, post);
+  async updateProduct(post: UpdateProductDto) {
+    await this.ProductRepository.update(post.id, post);
     const updatedProduct = await this.ProductRepository.findOne({
       where: {
-        id: id,
+        id: post.id,
       },
     });
     if (updatedProduct) {

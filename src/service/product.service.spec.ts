@@ -1,16 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ProductService } from './product.service';
-import { ProductEntity } from './entities/product.entity';
+import { ProductEntity } from '../entities/product.entity';
 
 describe('ProductService', () => {
   let service: ProductService;
+  const createEntity: ProductEntity = {
+    id: 12,
+    name: 'test2',
+    sku: '2312',
+  };
 
   const mockProductRepository = {
-    create: jest.fn().mockImplementation((dto) => dto),
+    create: jest.fn().mockImplementation((dto) => createEntity),
     save: jest
       .fn()
-      .mockImplementation((product) => Promise.resolve({ id: 15, ...product })),
+      .mockImplementation((product) => Promise.resolve({ ...product })),
   };
 
   beforeEach(async () => {
@@ -32,12 +37,13 @@ describe('ProductService', () => {
   });
 
   it('create user service', async () => {
-    expect(
-      await service.createProduct({
-        name: 'test2',
-        sku: '2312',
-      }),
-    ).toEqual({
+    const result = await service.createProduct({
+      inriverName: 'test2',
+      inriverSku: '2312',
+    });
+
+    expect(result).toEqual({
+      id: 12,
       name: 'test2',
       sku: '2312',
     });

@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { ProductModule } from './../src/product/product.module';
+import { ProductModule } from '../src/modules/product.module';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import ProductEntity from '../src/product/entities/product.entity';
+import ProductEntity from '../src/entities/product.entity';
 
 describe('ProductController (e2e)', () => {
   let app: INestApplication;

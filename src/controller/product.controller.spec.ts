@@ -1,25 +1,29 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductController } from './product.controller';
-import { ProductService } from './product.service';
+import { PRODUCT_SERVICE } from '../service/product.interface';
+import { ProductService } from '../service/product.service';
 
 describe('ProductController', () => {
   let controller: ProductController;
-
+  const createEntity = {
+    name: 'test2',
+    sku: '2312',
+  };
   const mockProductService = {
     createProduct: jest.fn((dto) => {
       return {
-        ...dto,
+        ...createEntity,
       };
     }),
-    updateProduct: jest.fn().mockImplementation((id, dto) => ({ id, ...dto })),
+    updateProduct: jest.fn().mockImplementation((dto) => ({ ...dto })),
   };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ProductController],
-      providers: [ProductService],
+      providers: [{ useClass: ProductService, provide: PRODUCT_SERVICE }],
     })
-      .overrideProvider(ProductService)
+      .overrideProvider(PRODUCT_SERVICE)
       .useValue(mockProductService)
       .compile();
 
@@ -32,12 +36,12 @@ describe('ProductController', () => {
 
   it('create product', async () => {
     const dto = {
-      name: 'test2',
-      sku: '2312',
+      inriverName: 'test2',
+      inriverSku: '2312',
     };
     expect(await controller.createProduct(dto)).toEqual({
-      name: dto.name,
-      sku: dto.sku,
+      name: dto.inriverName,
+      sku: dto.inriverSku,
     });
 
     expect(mockProductService.createProduct).toHaveBeenCalledWith(dto);
@@ -49,7 +53,7 @@ describe('ProductController', () => {
       name: 'test2',
       sku: '2312',
     };
-    expect(await controller.updateProduct('10', updateDto)).toEqual({
+    expect(await controller.updateProduct(updateDto)).toEqual({
       ...updateDto,
     });
   });
