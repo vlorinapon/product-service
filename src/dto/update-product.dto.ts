@@ -1,5 +1,5 @@
 export class UpdateProductDto {
-  id: number;
+  id: string;
   name: string;
   sku: string;
 }

@@ -12,15 +12,18 @@ describe('ProductController (e2e)', () => {
     {
       name: 'test2',
       sku: '2312',
-      id: 14,
+      id: 'e48485c1-7b49-41e6-b943-46ad82ec5386',
     },
   ];
   const mockProductRepository = {
     find: jest.fn().mockResolvedValue(mockProducts),
-    create: jest.fn().mockImplementation((dto) => dto),
-    save: jest
-      .fn()
-      .mockImplementation((product) => Promise.resolve({ id: 15, ...product })),
+    create: jest.fn().mockImplementation((dto) => mockProducts),
+    save: jest.fn().mockImplementation((product) =>
+      Promise.resolve({
+        id: 'e48485c1-7b49-41e6-b943-46ad82ec5386',
+        ...product,
+      }),
+    ),
   };
 
   beforeEach(async () => {
@@ -51,10 +54,13 @@ describe('ProductController (e2e)', () => {
       })
       .expect(201)
       .then((response) => {
-        expect(response.body).toEqual({
-          name: 'test2',
-          sku: '1234',
-        });
+        expect(response.body).toEqual([
+          {
+            name: 'test2',
+            sku: '2312',
+            id: 'e48485c1-7b49-41e6-b943-46ad82ec5386',
+          },
+        ]);
       });
   });
 

@@ -5,6 +5,7 @@ import { CreateProductDto } from '../dto/create-product.dto';
 import { UpdateProductDto } from '../dto/update-product.dto';
 import ProductEntity from '../entities/product.entity';
 import { IProductService } from './product.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ProductService implements IProductService {
@@ -19,7 +20,7 @@ export class ProductService implements IProductService {
   }
 
   // find by id
-  async getProductById(id: number) {
+  async getProductById(id: string) {
     const product = await this.ProductRepository.findOne({
       where: {
         id: id,
@@ -35,7 +36,7 @@ export class ProductService implements IProductService {
   // create
   async createProduct(product: CreateProductDto) {
     const prodEntity: ProductEntity = {
-      id: Date.now(),
+      id: uuidv4(),
       name: product.inriverName,
       sku: product.inriverSku,
     };
@@ -61,7 +62,7 @@ export class ProductService implements IProductService {
   }
 
   // delete
-  async deleteProduct(id: number) {
+  async deleteProduct(id: string) {
     const deletedProduct = await this.ProductRepository.delete(id);
     if (!deletedProduct.affected) {
       throw new HttpException('Product not found', HttpStatus.NOT_FOUND);

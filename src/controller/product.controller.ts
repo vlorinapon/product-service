@@ -29,10 +29,10 @@ export class ProductController {
   }
 
   // get Product by id
-  @Get('/getbyId:id')
+  @Get('/getbyId/:id')
   @ApiOperation({ summary: 'Get Product by Id' })
   getProductById(@Param('id') id: string) {
-    return this.productService.getProductById(Number(id));
+    return this.productService.getProductById(id);
   }
 
   // create Product
@@ -50,8 +50,8 @@ export class ProductController {
   }
 
   //delete Product
-  @Delete(':id')
+  @Delete('/delete/:id')
   async deleteProduct(@Param('id') id: string) {
-    this.productService.deleteProduct(Number(id));
+    this.productService.deleteProduct(id);
   }
 }

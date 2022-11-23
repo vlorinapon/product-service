@@ -5,8 +5,8 @@ export const PRODUCT_SERVICE = 'PRODUCT SERVICE';
 
 export interface IProductService {
   getAllProducts();
-  getProductById(id: number);
+  getProductById(id: string);
   createProduct(product: CreateProductDto);
   updateProduct(post: UpdateProductDto);
-  deleteProduct(id: number);
+  deleteProduct(id: string);
 }
