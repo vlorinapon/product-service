@@ -62,9 +62,3 @@ $npm install --save pg
 ## Swagger Run the api and check this url:
 `http://localhost:3000/api`
 
-
-## Run tests 
-npm run test
-
-## Run e2e tests 
-npm run test:e2e
