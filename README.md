@@ -41,7 +41,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Creating a CRUD Module
 
-```- $nest generate resource product
+```
+- $nest generate resource product
 - What transport layer do you use? REST API
 - Would you like to generate CRUD entry points? Yes
 
