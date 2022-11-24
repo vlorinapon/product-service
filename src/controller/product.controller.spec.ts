@@ -49,7 +49,7 @@ describe('ProductController', () => {
 
   it('update product', async () => {
     const updateDto = {
-      id: 10,
+      id: '10',
       name: 'test2',
       sku: '2312',
     };

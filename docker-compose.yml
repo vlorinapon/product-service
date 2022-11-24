@@ -17,13 +17,13 @@ services:
       - .:/home/node/app
     networks:
       - app-network
-    command: npm run watch
+    command: npm run start
   product-db-nest:
     image: 'postgres:15'
     restart: unless-stopped
     container_name: product-db-nest
     ports:
-      - "${EXT_POSTGRES_PORT}:${POSTGRES_PORT}"
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     environment:
       POSTGRES_USER: "${POSTGRES_USER}"
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

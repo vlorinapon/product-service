@@ -6,7 +6,7 @@ import { ProductEntity } from '../entities/product.entity';
 describe('ProductService', () => {
   let service: ProductService;
   const createEntity: ProductEntity = {
-    id: 'e48485c1 - 7b49- 41e6 - b943 - 46ad82ec5386',
+    id: 'e48485c1-7b49-41e6-b943-46ad82ec5386',
     name: 'test2',
     sku: '2312',
   };

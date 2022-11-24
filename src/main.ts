@@ -9,6 +9,11 @@ async function bootstrap() {
     .setTitle('Demo API')
     .setDescription('A Demo API with CRUD functionality')
     .setVersion('v1')
+    .addSecurity('Authorisation', {
+      type: 'apiKey',
+      in: 'header',
+      name: 'x-api-key',
+    })
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

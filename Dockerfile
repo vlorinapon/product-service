@@ -13,7 +13,6 @@ WORKDIR /home/node/app
 COPY --from=builder node_modules node_modules
 USER node
 COPY --chown=node:node . .
-RUN rm -f .npmrc
 EXPOSE 3000
 
 CMD [ "npm", "start" ]

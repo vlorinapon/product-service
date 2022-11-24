@@ -9,10 +9,12 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiGuard } from '../decorators/apiGuard.decorator';
 import { CreateProductDto } from '../dto/create-product.dto';
 import { UpdateProductDto } from '../dto/update-product.dto';
 import { IProductService, PRODUCT_SERVICE } from '../service/product.interface';
 
+@ApiGuard()
 @ApiTags('Products')
 @Controller('Products')
 export class ProductController {
